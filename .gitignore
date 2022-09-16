@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints
+*.egg-info/
+*.egg
+paper_result/*
+paper_result*/*
+ProtTrans/*
