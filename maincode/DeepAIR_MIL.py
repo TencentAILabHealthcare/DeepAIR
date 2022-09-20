@@ -71,6 +71,7 @@ def predict(input_data_file,
                             })
     else:
         cell_type = 'TCELL'
+        input_df=df
     # add transformer features
     seq_trans_beta_feature, seq_trans_alpha_feature = generate_transformer_feature_on_the_fly(input_df,
                                                          transformer_model_folder,
