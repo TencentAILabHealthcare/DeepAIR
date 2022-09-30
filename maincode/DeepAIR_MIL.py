@@ -141,14 +141,10 @@ def predict(input_data_file,
     
     mil_output_df = pd.DataFrame()
     mil_output_df['Prediction Target'] = [selected_disease]
-        
-    MIL_prediciton = MIL_head(input=input_DF[selected_disease+'_prob'].to_numpy(), MIL_Method = 'average_pooling')
-    print(f'The repertoire-level prediction based on the average pooling strategy is {MIL_prediciton}')
-    mil_output_df['MIL (Average Pooling)'] = [MIL_prediciton]
     
     MIL_prediciton = MIL_head(input=input_DF[selected_disease+'_prob'].to_numpy(), MIL_Method = 'majority_voting')
     print(f'The repertoire-level prediction based on the majority voting strategy is {MIL_prediciton}')
-    mil_output_df['MIL (Majority Voting)'] = [MIL_prediciton]
+    mil_output_df['Prediction (MIL)'] = [MIL_prediciton]
     
     mil_output_df.to_csv(os.path.join(output_folder,'repertoire-level_prediction.csv'))
     
