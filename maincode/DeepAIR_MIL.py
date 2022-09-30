@@ -161,7 +161,7 @@ def main():
                         help='path to the input dataframe')
     parser.add_argument('--result_folder', 
                         type=str, 
-                        default='../../DeepAIR/paper_result_sample_test_MIL', 
+                        default='../../DeepAIR/result_MIL', 
                         help='folder to save the results')
     parser.add_argument('--AF2_feature_folder', 
                         type=str, 

@@ -122,7 +122,7 @@ def main():
                     )
     parser.add_argument('--result_folder', 
                         type=str, 
-                        default='../../DeepAIR/paper_result_sample_test_REG/B0801_RAKFKQLL_BZLF1_EBV', 
+                        default='../../DeepAIR/result_BAP/B0801_RAKFKQLL_BZLF1_EBV', 
                         help='folder to save the results'
                     )
     parser.add_argument('--epitope', 

@@ -125,7 +125,7 @@ def main():
                     )
     parser.add_argument('--result_folder', 
                         type=str, 
-                        default='../../DeepAIR/paper_result_sample_test_CLS/A0301_KLGGALQAK_IE-1_CMV', 
+                        default='../../DeepAIR/result_BRP/A0301_KLGGALQAK_IE-1_CMV', 
                         help='folder to save the results'
                     )
     parser.add_argument('--epitope', 
