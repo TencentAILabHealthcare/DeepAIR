@@ -11,7 +11,7 @@ from datetime import datetime
 import tensorflow as tf
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-sys.path.insert(0, os.path.abspath('../../DeepAIR'))
+sys.path.insert(0, os.path.abspath('../DeepAIR'))
 
 from transformers import TFBertModel, BertTokenizer
 

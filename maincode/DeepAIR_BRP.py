@@ -7,7 +7,7 @@ import pandas as pd
 import argparse
 from datetime import datetime
 
-sys.path.insert(0, os.path.abspath('../../DeepAIR'))
+sys.path.insert(0, os.path.abspath('../DeepAIR'))
 
 import tensorflow as tf
 tf.compat.v1.enable_eager_execution()
@@ -120,12 +120,12 @@ def main():
     # data options
     parser.add_argument('--input_data_file', 
                         type=str, 
-                        default='../../DeepAIR/data/BRP/A0301_KLGGALQAK_IE-1_CMV.csv',
+                        default='../DeepAIR/data/BRP/A0301_KLGGALQAK_IE-1_CMV.csv',
                         help='path to the input dataframe'
                     )
     parser.add_argument('--result_folder', 
                         type=str, 
-                        default='../../DeepAIR/result_BRP/A0301_KLGGALQAK_IE-1_CMV', 
+                        default='../DeepAIR/result_BRP/A0301_KLGGALQAK_IE-1_CMV', 
                         help='folder to save the results'
                     )
     parser.add_argument('--epitope', 
@@ -135,12 +135,12 @@ def main():
                     )
     parser.add_argument('--AF2_feature_folder', 
                         type=str, 
-                        default='../../DeepAIR/data/structure_feature/BRP',
+                        default='../DeepAIR/data/structure_feature/BRP',
                         help='AF2 feature file name'
                     )
     parser.add_argument('--transformer_model_folder', 
                         type=str, 
-                        default='../../DeepAIR/ProtTrans/prot_bert_bfd', 
+                        default='../DeepAIR/ProtTrans/prot_bert_bfd', 
                         help='Root of the transformer model'
                     )
     # model selection

@@ -1,7 +1,7 @@
 import os
 
 # DeepAIR Model
-MODEL_SAVE_PATH = os.path.abspath('../checkpoints')
+MODEL_SAVE_PATH = os.path.abspath('./checkpoints')
 
 DeepAIR_BRP_saved_model_dict = dict()
 DeepAIR_BRP_saved_model_dict['A1101_AVFDRKSDAK_EBNA-3B_EBV'] = os.path.join(MODEL_SAVE_PATH, 'BRP/A1101_AVFDRKSDAK_EBNA-3B_EBV_binder_model')

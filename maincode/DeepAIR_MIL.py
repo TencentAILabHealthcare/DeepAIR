@@ -8,7 +8,7 @@ from datetime import datetime
 
 from sklearn import metrics
 
-sys.path.insert(0, os.path.abspath('../../DeepAIR'))
+sys.path.insert(0, os.path.abspath('../DeepAIR'))
 
 import tensorflow as tf
 tf.compat.v1.enable_eager_execution()
@@ -157,19 +157,19 @@ def main():
     # data options
     parser.add_argument('--input_data_file', 
                         type=str, 
-                        default='../../DeepAIR/data/MIL/IBD_BCR/GSM3576433_IBD_BCR.csv',
+                        default='../DeepAIR/data/MIL/IBD_BCR/GSM3576433_IBD_BCR.csv',
                         help='path to the input dataframe')
     parser.add_argument('--result_folder', 
                         type=str, 
-                        default='../../DeepAIR/result_MIL', 
+                        default='../DeepAIR/result_MIL', 
                         help='folder to save the results')
     parser.add_argument('--AF2_feature_folder', 
                         type=str, 
-                        default='../../DeepAIR/data/structure_feature/MIL',
+                        default='../DeepAIR/data/structure_feature/MIL',
                         help='AF2 feature file name')
     parser.add_argument('--transformer_model_folder', 
                         type=str, 
-                        default='../../DeepAIR/ProtTrans/prot_bert_bfd', 
+                        default='../DeepAIR/ProtTrans/prot_bert_bfd', 
                         help='Root of the transformer model'
                         )
     parser.add_argument('--task', 
