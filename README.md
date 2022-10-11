@@ -81,7 +81,7 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
 
     python ./maincode/DeepAIR_BRP.py 
 
-(2) for binding affinity prediciton(BAP) (Regression)
+(2) for binding affinity prediciton (BAP) (Regression)
 
     python ./maincode/DeepAIR_BAP.py 
 
