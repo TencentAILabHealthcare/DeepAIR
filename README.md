@@ -55,7 +55,7 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
         --AF2_feature_folder  \ # AF2 feature folder
         --transformer_model_folder  \ # folder to save the pretrained BERT model
 
-(2) for binding specificity prediciton (BAP) (Regression)
+(2) for binding affinity prediciton (BAP) (Regression)
 
     python ./maincode/DeepAIR_BAP.py 
         --input_data_file  \ # path to the input table 
@@ -77,11 +77,11 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
 
 # runing examples
 
-(1) for binding specificity prediciton(BSP) (Classification)
+(1) for binding reactivity prediciton (BRP) (Classification)
 
     python ./maincode/DeepAIR_BRP.py 
 
-(2) for binding specificity prediciton(BAP) (Regression)
+(2) for binding affinity prediciton(BAP) (Regression)
 
     python ./maincode/DeepAIR_BAP.py 
 
@@ -91,7 +91,7 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
 
 # Dataset:
 
-(1) Example data are given in ./data
+Example data are given in ./data
 
 # Disclaimer
 This tool is for research purpose and not approved for clinical use.
@@ -107,3 +107,5 @@ The copyright holder for this project is Tencent AI Lab.
 All rights reserved.
 
 # Citation
+
+Zhao Y, He B, Li C, Xu Z, Su X, Rossjohn J, Song J, Yao J. DeepAIR: a deep-learning framework for effective integration of sequence and 3D structure to enable adaptive immune receptor analysis. bioRxiv.
