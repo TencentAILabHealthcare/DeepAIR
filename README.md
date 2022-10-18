@@ -9,12 +9,20 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
 
 <center>Flowchart of DeepAIR. DeepAIR has three major processing stages, including multi-channel feature extraction, multimodal feature fusion, and task-specific prediction. At the multi-channel feature extraction stage, three feature encoders are involved and used to extract informative features from the gene, sequence, and structure inputs. Then the resulting features produced by three different encoders are further integrated via a gating-based attention mechanism as well as the tensor fusion at the multimodal feature fusion stage to generate a comprehensive representation. Finally, at the task-specific prediction stage, specifically designed prediction layers are utilized to map the obtained representations to the output results. </center>
 
-# install
+# System requirements
+## Hardware requirements
+`DeepAIR` package requires only a standard computer with enough RAM and a NVIDIA GPU to support operations.
+## Software requirements
+### OS requirements
+This tool is supported for Linux. The tool has been tested on the following systems: <br>
++ CentOS Linux release 8.2.2.2004
++ Ubuntu 18.04.5 LTS
+### Python dependencies
+`DeepAIR` mainly depends on the Python scientific stack.   <br>
 
-(1) HuggingFace Transformer (Tensorflow Version: 4.19.4):
-    [https://huggingface.co/docs/transformers/installation]
-
-(2) other important packages including:
++ The important packages including:
+```
+    umap-learn                   0.5.1
     scikit-learn                 0.23.2
     tensorflow-gpu               2.7.0
     biopython                    1.76    
@@ -24,11 +32,14 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
     pandas                       1.4.2
     tokenizers                   0.12.1
     transformers                 4.19.4
+```
++ Transformers is from HuggingFace Transformer (Transformer Version: 4.19.4):
+    [https://huggingface.co/docs/transformers/installation]
++ `./DeepAIR/requirements.txt` describes more details of the requirements.    
+### Pretrained model Requirements
+Download `ProtBert-BFD` model
 
-(3) ./maincode/requirements.txt describes more details of the requirements.
-
-(4) download ProtBert-BFD model
-    ProtBert-BFD is based on Bert model which pretrained on a large corpus of protein sequences in a self-supervised fashion, which is avaiable from [https://huggingface.co/Rostlab/prot_bert_bfd/tree/main]
+`ProtBert-BFD` is based on Bert model which pretrained on a large corpus of protein sequences in a self-supervised fashion, which is avaiable from [https://huggingface.co/Rostlab/prot_bert_bfd/tree/main]
     
     The downloaded model should be stored as:
     ./ProtTrans/prot_bert_bfd  \
@@ -38,13 +49,70 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
         tokenizer_config.json
         vocab.txt
 
-# config file
+# Install guide
+## For docker users
+ 
+### 1-Pull docker images from docker-hub.（optional）
+```
+docker pull deepair1/deepair:latest
+```
++ If you don't want to show the username, do as follows:
+```
+docker tag deepair1/deepair:latest deepair:latest
+docker rmi deepair1/deepair:latest
+```
 
-(1) Edite the ./maincode/config.py file which provides the paths of the obtained DeepAIR models (A well-edited file is given as a default example.)
+### 2-Download docker file `deepair.tar` from [GoogleDrive](https://drive.google.com/file/d/1-fahB823OZLwsqKu_8DRPMyOw6yYwpHl/view?usp=sharing) or [OneDrive](https://1drv.ms/u/s!Au2cJRs-_u93gvZeel2I1EmYt3F17A?e=lKYQHj).（optional）
++ Add docker image by loading the docker file:
+```
+docker load < deepair.tar
+```
 
-# runing
+### 3-Start your docker and run examples:
+```
+docker run --name deepair --gpus all -it --rm  deepair:latest /bin/bash
+```
++ If there are multiple GPUs in your device and you just want to use only one GPU:
+```
+docker run --name deepair --gpus '"device=0"' -it --rm  deepair:latest /bin/bash
+```
++ Test directly because all files are contained in this docker image: 
+```
+python ./maincode/DeepAIR_BRP.py
+python ./maincode/DeepAIR_BAP.py
+python ./maincode/DeepAIR_MIL.py
+```
 
-(1) for binding reactivity prediciton (BRP) (Classification)
+## For conda users
+
+### 1-Configure the enviroment.
+```
+git clone https://github.com/TencentAILabHealthcare/DeepAIR.git 
+cd ./DeepAIR
+conda create -n deepair python=3.8
+conda activate deepair
+pip install umap-learn==0.5.1 tensorflow-gpu==2.7.0 scikit-learn==0.23.2 biopython==1.76 huggingface-hub==0.2.1 matplotlib==3.5.1 numpy==1.19.5 pandas==1.4.2 tokenizer==1.0.0 transformers==4.19.4 umap-learn==0.5.1 seaborn==0.10.1
+conda install cuda -c nvidia
+conda deactivate
+```
+
+### 2-Download pretrained model and test:
++ Download `config.json, special_tokens_map.json, tf_model.h5, tokenizer_config.json, vocab.txt` from [https://huggingface.co/Rostlab/prot_bert_bfd/tree/main] and save them in the folder `./DeepAIR/ProtTrans/prot_bert_bfd`.
++ Run commands in the folder `./DeepAIR`:
+```
+conda activate deepair 
+CUDA_VISIBLE_DEVICES=0 python ./maincode/DeepAIR_BRP.py
+CUDA_VISIBLE_DEVICES=0 python ./maincode/DeepAIR_BAP.py
+CUDA_VISIBLE_DEVICES=0 python ./maincode/DeepAIR_MIL.py
+```
+
+# Config file
+
+(1) Edite the `./maincode/config.py` file which provides the paths of the obtained DeepAIR models (A well-edited file is given as a default example.)
+
+# Runing
+
+(1) For binding reactivity prediciton (BRP) (Classification)
 
     python ./maincode/DeepAIR_BRP.py  \
         --input_data_file  \ # path to the input table 
@@ -55,7 +123,7 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
         --AF2_feature_folder  \ # AF2 feature folder
         --transformer_model_folder  \ # folder to save the pretrained BERT model
 
-(2) for binding affinity prediciton (BAP) (Regression)
+(2) For binding affinity prediciton (BAP) (Regression)
 
     python ./maincode/DeepAIR_BAP.py 
         --input_data_file  \ # path to the input table 
@@ -66,7 +134,7 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
         --AF2_feature_folder  \ # AF2 feature folder
         --transformer_model_folder  \ # folder to save the pretrained BERT model
 
-(3) for immune repertoire classification (Multiple instance learning (MIL))
+(3) For immune repertoire classification (Multiple instance learning (MIL))
     
     python ./maincode/DeepAIR_MIL.py 
         --input_data_file  \ # path to the input table (an immnue repertoire of a subject)
@@ -75,23 +143,29 @@ Structural-docking-based binding between the adaptive immune receptors (AIRs), i
         --transformer_model_folder  \ # folder to save the pretrained BERT model
         --task \ # can be one of 'IBD_BCR' (inflammatory bowel disease (BCR)), 'IBD_TCR' (inflammatory bowel disease (TCR)), 'NPC_BCR' (nasopharyngeal carcinoma (BCR)), or 'NPC_TCR'(nasopharyngeal carcinoma (TCR))
 
-# runing examples
+# Runing examples
 
-(1) for binding reactivity prediciton (BRP) (Classification)
+(1) For binding reactivity prediciton (BRP) (Classification)
 
     python ./maincode/DeepAIR_BRP.py 
 
-(2) for binding affinity prediciton (BAP) (Regression)
+(2) For binding affinity prediciton (BAP) (Regression)
 
     python ./maincode/DeepAIR_BAP.py 
 
-(3) for immune repertoire classification (Multiple instance learning (MIL))
+(3) For immune repertoire classification (Multiple instance learning (MIL))
 
     python ./maincode/DeepAIR_MIL.py 
 
+# Time cost
+
+Typical install time on a "normal" desktop computer is about 30 minutes.
+
+Exptected run time for infering every sample on a "normal" desktop computer is about 1 second.
+
 # Dataset:
 
-Example data are given in ./data
+Example data are given in `./data`
 
 # Disclaimer
 This tool is for research purpose and not approved for clinical use.
