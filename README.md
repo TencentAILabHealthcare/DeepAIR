@@ -91,7 +91,7 @@ git clone https://github.com/TencentAILabHealthcare/DeepAIR.git
 cd ./DeepAIR
 conda create -n deepair python=3.8
 conda activate deepair
-pip install umap-learn==0.5.1 tensorflow-gpu==2.7.0 scikit-learn==0.23.2 biopython==1.76 huggingface-hub==0.2.1 matplotlib==3.5.1 numpy==1.19.5 pandas==1.4.2 tokenizer==1.0.0 transformers==4.19.4 umap-learn==0.5.1 seaborn==0.10.1
+pip install umap-learn==0.5.1 tensorflow-gpu==2.7.0 scikit-learn==0.23.2 biopython==1.76 huggingface-hub==0.2.1 matplotlib==3.5.1 numpy==1.19.5 pandas==1.4.2 tokenizer==1.0.0 transformers==4.19.4 umap-learn==0.5.1 seaborn==0.10.1 protobuf==3.20.3
 conda install cuda -c nvidia
 conda deactivate
 ```
