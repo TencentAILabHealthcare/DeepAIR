@@ -36,7 +36,8 @@ def predict(input_data_file,
             seq_transformer_info,
             AF2_Feature_Info, 
             selected_epitope = None, 
-            output_folder = None
+            output_folder = None,
+            task_name = '*'
             ):
 
     # print('-'*30)
@@ -62,7 +63,7 @@ def predict(input_data_file,
                                                                                         CDR3a = 'TRA_cdr3', 
                                                                                         a_vgene = 'TRA_v_gene',
                                                                                         a_jgene = 'TRA_j_gene',
-                                                                                        task_name = '*',
+                                                                                        task_name = task_name,
                                                                                         ID = 'ID', 
                                                                                     )
 
@@ -71,12 +72,7 @@ def predict(input_data_file,
     test_input['TRA_cdr3_splited'] = seq_trans_alpha_feature
     test_input['TRB_cdr3_Stru'] = AF2_feature_beta_feature
     test_input['TRA_cdr3_Stru'] = AF2_feature_alpha_feature
-    
-    if selected_epitope:
-        pass
-    else:
-        selected_epitope = list(DeepAIR_BAP_saved_model_dict.keys())
-        
+            
     output_df = pd.DataFrame()
     output_df['ID'] = test_input['ID']
     output_df['TRB_cdr3'] = test_input['TRB_cdr3']
@@ -117,7 +113,7 @@ def main():
     # data options
     parser.add_argument('--input_data_file', 
                         type=str, 
-                        default='../DeepAIR/data/BAP/B0801_RAKFKQLL_BZLF1_EBV_Reg.csv',
+                        default='../DeepAIR/sampledata/BAP/B0801_RAKFKQLL_BZLF1_EBV_Reg.csv',
                         help='path to the input dataframe'
                     )
     parser.add_argument('--result_folder', 
@@ -126,13 +122,13 @@ def main():
                         help='folder to save the results'
                     )
     parser.add_argument('--epitope', 
-                        nargs='+',         
+                        type=str,         
                         default='B0801_RAKFKQLL_BZLF1_EBV', 
                         help='Select an interested epitope'
                     )
     parser.add_argument('--AF2_feature_folder', 
                         type=str, 
-                        default='../DeepAIR/data/structure_feature/BAP',
+                        default='../DeepAIR/sampledata/structure_feature/BAP',
                         help='AF2 feature file name'
                     )
     parser.add_argument('--transformer_model_folder', 
@@ -145,7 +141,7 @@ def main():
     parser.add_argument('--predictor_info', type=str, default='GatedFusion', help='CNN, GatedFusion')
     parser.add_argument('--SeqEncoderTrans', action='store_false', help='transformer encoder')
     parser.add_argument('--AF2_Info', type=str, default='Feature', help='3D_structure, Feature')
-    
+    parser.add_argument('--dataset_name', type=str, default='10X', help='assign the dataset_name for fast pairing the obtained structure features')
     parser.add_argument('--model_seed', type=int, default=42, help='model seed')
 
     args = parser.parse_args()      
@@ -204,6 +200,7 @@ def main():
                             AF2_Feature_Info, # encoder structure
                             selected_epitope = selected_epitope, 
                             output_folder= result_folder,
+                            task_name=args.dataset_name
                     ) #'TRB_v_gene','TRB_j_gene','TRA_v_gene','TRA_j_gene','TRB_cdr3','TRA_cdr3',
  
 #%%

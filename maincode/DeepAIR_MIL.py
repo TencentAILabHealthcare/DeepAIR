@@ -60,14 +60,14 @@ def predict(input_data_file,
         os.makedirs(output_folder, exist_ok=True)
     
     df = pd.read_csv(input_data_file)
-    if 'BRH_cdr3' in list(df.columns):
+    if 'Heavy_cdr3' in list(df.columns):
         cell_type = 'BCELL'
-        input_df=df.rename(columns={'BRH_cdr3':'TRB_cdr3',
-                            'BRH_v_gene':'TRB_v_gene',
-                            'BRH_j_gene':'TRB_j_gene',
-                            'BRL_cdr3':'TRA_cdr3',
-                            'BRL_v_gene':'TRA_v_gene',
-                            'BRL_j_gene':'TRA_j_gene',
+        input_df=df.rename(columns={'Heavy_cdr3':'TRB_cdr3',
+                            'Heavy_v_gene':'TRB_v_gene',
+                            'Heavy_j_gene':'TRB_j_gene',
+                            'Light_cdr3':'TRA_cdr3',
+                            'Light_v_gene':'TRA_v_gene',
+                            'Light_j_gene':'TRA_j_gene',
                             })
     else:
         cell_type = 'TCELL'
@@ -108,12 +108,12 @@ def predict(input_data_file,
         output_df['TRA_j_gene'] = test_input['TRA_j_gene']
     else:
         output_df['ID'] = test_input['ID']
-        output_df['BRH_cdr3'] = test_input['TRB_cdr3']
-        output_df['BRL_cdr3'] = test_input['TRA_cdr3']
-        output_df['BRH_v_gene'] = test_input['TRB_v_gene']
-        output_df['BRH_j_gene'] = test_input['TRB_j_gene']
-        output_df['BRL_v_gene'] = test_input['TRA_v_gene']
-        output_df['BRL_j_gene'] = test_input['TRA_j_gene']
+        output_df['Heavy_cdr3'] = test_input['TRB_cdr3']
+        output_df['Light_cdr3'] = test_input['TRA_cdr3']
+        output_df['Heavy_v_gene'] = test_input['TRB_v_gene']
+        output_df['Heavy_j_gene'] = test_input['TRB_j_gene']
+        output_df['Light_v_gene'] = test_input['TRA_v_gene']
+        output_df['Light_j_gene'] = test_input['TRA_j_gene']
              
     model_save_path = DeepAIR_MIL_saved_model_dict[selected_disease]
     
@@ -157,7 +157,7 @@ def main():
     # data options
     parser.add_argument('--input_data_file', 
                         type=str, 
-                        default='../DeepAIR/data/MIL/IBD_BCR/GSM3576433_IBD_BCR.csv',
+                        default='../DeepAIR/sampledata/MIL/IBD_BCR/GSM3576433_IBD_BCR.csv',
                         help='path to the input dataframe')
     parser.add_argument('--result_folder', 
                         type=str, 
@@ -165,7 +165,7 @@ def main():
                         help='folder to save the results')
     parser.add_argument('--AF2_feature_folder', 
                         type=str, 
-                        default='../DeepAIR/data/structure_feature/MIL',
+                        default='../DeepAIR/sampledata/structure_feature/MIL',
                         help='AF2 feature file name')
     parser.add_argument('--transformer_model_folder', 
                         type=str, 

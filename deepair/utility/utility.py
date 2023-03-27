@@ -99,7 +99,7 @@ def generate_AF2_feature_on_the_fly(input_data_frame,
             
             current_CDR3a_ID_note = f'{row[CDR3a]}_{row[a_vgene].replace("/", "-")}_{row[a_jgene].replace("/", "-")}_{current_ID}_{task_name}.npy'  
             print(current_CDR3a_ID_note)
-            CDR3a_File = glob.glob(os.path.join(AF2_feature_file, "*", current_CDR3a_ID_note))[0]
+            CDR3a_File = glob.glob(os.path.join(AF2_feature_file, task_name, current_CDR3a_ID_note))[0]
             CDR3a_Feature = get_AF2_feature(CDR3a_File) 
 
             # moving_file = os.path.join(moving_folder, '/'.join(CDR3a_File.split('/')[-2:]))

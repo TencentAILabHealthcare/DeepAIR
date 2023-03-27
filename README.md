@@ -49,6 +49,10 @@ Download `ProtBert-BFD` model
         tokenizer_config.json
         vocab.txt
 
+
+### Structure information preprocessing 
+DeepAIR utilizes AlphaFold2 to extract structure information (Structure information preprocessing). This initial structure features are then recalibrated in the structure encoder of DeepAIR to make them more suitable for binding affinity and reactivity prediction. The detailed steps are given in `./DeepAIR/preprocessing_structure_feature`, and a indenpendt README.md is also provided as:`./DeepAIR/preprocessing_structure_feature/ReadMe.md`
+
 # Install guide
 ## For docker users
  
@@ -118,10 +122,8 @@ CUDA_VISIBLE_DEVICES=0 python ./maincode/DeepAIR_MIL.py
         --input_data_file  \ # path to the input table 
         --result_folder  \ #  folder to save the results
         --epitope  \ # selected epitope for the evaluation, can be a epitope such as "--epitope A1101_AVFDRKSDAK_EBNA-3B_EBV" 
-                     # or a list of epitopes such as "--epitope A1101_AVFDRKSDAK_EBNA-3B_EBV A0201_GILGFVFTL_Flu-MP_Influenza" 
-                     # (default = None)
         --AF2_feature_folder  \ # AF2 feature folder
-        --transformer_model_folder  \ # folder to save the pretrained BERT model
+        --transformer_model_folder  \ # folder to save the pretrained BERT model 
 
 (2) For binding affinity prediciton (BAP) (Regression)
 
@@ -129,8 +131,6 @@ CUDA_VISIBLE_DEVICES=0 python ./maincode/DeepAIR_MIL.py
         --input_data_file  \ # path to the input table 
         --result_folder  \ #  folder to save the results
         --epitope  \ # selected epitope for the evaluation, can be a epitope such as "--epitope A1101_AVFDRKSDAK_EBNA-3B_EBV" 
-                     # or a list of epitopes such as "--epitope A1101_AVFDRKSDAK_EBNA-3B_EBV A0201_GILGFVFTL_Flu-MP_Influenza" 
-                     # (default = None)
         --AF2_feature_folder  \ # AF2 feature folder
         --transformer_model_folder  \ # folder to save the pretrained BERT model
 
@@ -147,25 +147,38 @@ CUDA_VISIBLE_DEVICES=0 python ./maincode/DeepAIR_MIL.py
 
 (1) For binding reactivity prediciton (BRP) (Classification)
 
-    python ./maincode/DeepAIR_BRP.py 
+    python ./maincode/DeepAIR_BRP.py  \
+    --input_data_file ../DeepAIR/DataSplit/test/BRP/A0301_KLGGALQAK_IE-1_CMV_binder_test.csv  \
+    --result_folder ../DeepAIR/result_BRP/A0301_KLGGALQAK_IE-1_CMV  \
+    --epitope A0301_KLGGALQAK_IE-1_CMV  \
+    --AF2_feature_folder ../DeepAIR/DataSplit/structure_feature  \
+    --transformer_model_folder ../DeepAIR/ProtTrans/prot_bert_bfd  \
 
 (2) For binding affinity prediciton (BAP) (Regression)
 
-    python ./maincode/DeepAIR_BAP.py 
+    python ./maincode/DeepAIR_BAP.py  \
+    --input_data_file ../DeepAIR/DataSplit/test/BRP/A0301_KLGGALQAK_IE-1_CMV_binder_test.csv  \
+    --result_folder ../DeepAIR/result_BAP/A0301_KLGGALQAK_IE-1_CMV  \
+    --epitope A0301_KLGGALQAK_IE-1_CMV  \
+    --AF2_feature_folder ../DeepAIR/DataSplit/structure_feature  \
+    --transformer_model_folder ../DeepAIR/ProtTrans/prot_bert_bfd  \
 
 (3) For immune repertoire classification (Multiple instance learning (MIL))
 
-    python ./maincode/DeepAIR_MIL.py 
+    python ./maincode/DeepAIR_MIL.py  \
+    --input_data_file ../DeepAIR/DataSplit/test/MIL/IBD_BCR_test.csv  \
+    --result_folder ../DeepAIR/result_MIL/IBD_BCR  \
+    --AF2_feature_folder ../DeepAIR/DataSplit/structure_feature  \
+    --transformer_model_folder ../DeepAIR/ProtTrans/prot_bert_bfd  \
+    --task IBD_BCR \
 
 # Time cost
 
 Typical install time on a "normal" desktop computer is about 30 minutes.
 
-Exptected run time for infering every sample on a "normal" desktop computer is about 1 second.
-
 # Dataset:
 
-Example data are given in `./data`
+Example data are given in `./sampledata`. The full data including the obtained structures and training/validation/test splits are given on Zenodo at: https://zenodo.org/record/7758478.
 
 # Disclaimer
 This tool is for research purpose and not approved for clinical use.

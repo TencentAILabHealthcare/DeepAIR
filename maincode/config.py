@@ -14,6 +14,13 @@ DeepAIR_BRP_saved_model_dict['A0301_KLGGALQAK_IE-1_CMV'] = os.path.join(MODEL_SA
 DeepAIR_BRP_saved_model_dict['LTDEMIAQY'] = os.path.join(MODEL_SAVE_PATH, 'BRP/LTDEMIAQY_model')
 DeepAIR_BRP_saved_model_dict['TTDPSFLGRY'] = os.path.join(MODEL_SAVE_PATH, 'BRP/TTDPSFLGRY_model')
 DeepAIR_BRP_saved_model_dict['YLQPRTFLL'] = os.path.join(MODEL_SAVE_PATH, 'BRP/YLQPRTFLL_model')
+DeepAIR_BRP_saved_model_dict['S1_NTD'] = os.path.join(MODEL_SAVE_PATH, 'BRP/S1_NTD_model')
+DeepAIR_BRP_saved_model_dict['S1_RBD'] = os.path.join(MODEL_SAVE_PATH, 'BRP/S1_RBD_model')
+DeepAIR_BRP_saved_model_dict['S2'] = os.path.join(MODEL_SAVE_PATH, 'BRP/S2_model')
+DeepAIR_BRP_saved_model_dict['ENV_HIV'] = os.path.join(MODEL_SAVE_PATH, 'BRP/ENV_HIV_model')
+DeepAIR_BRP_saved_model_dict['GP_EBOV'] = os.path.join(MODEL_SAVE_PATH, 'BRP/GP_EBOV_model')
+DeepAIR_BRP_saved_model_dict['CS_Plasmodium'] = os.path.join(MODEL_SAVE_PATH, 'BRP/CS_Plasmodium_model')
+DeepAIR_BRP_saved_model_dict['HA_Influenza'] = os.path.join(MODEL_SAVE_PATH, 'BRP/HA_Flu_model')
 
 DeepAIR_BAP_saved_model_dict = dict()
 DeepAIR_BAP_saved_model_dict['A1101_AVFDRKSDAK_EBNA-3B_EBV'] = os.path.join(MODEL_SAVE_PATH, 'BAP/A1101_AVFDRKSDAK_EBNA-3B_EBV_Reg_model')
