@@ -141,7 +141,7 @@ def main():
     parser.add_argument('--predictor_info', type=str, default='GatedFusion', help='CNN, GatedFusion')
     parser.add_argument('--SeqEncoderTrans', action='store_false', help='transformer encoder')
     parser.add_argument('--AF2_Info', type=str, default='Feature', help='3D_structure, Feature')
-    parser.add_argument('--dataset_name', type=str, default='10X', help='assign the dataset_name for fast pairing the obtained structure features')
+    parser.add_argument('--dataset_name', type=str, default='*', help='assign the dataset_name for fast pairing the obtained structure features')
     parser.add_argument('--model_seed', type=int, default=42, help='model seed')
 
     args = parser.parse_args()      
