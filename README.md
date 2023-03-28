@@ -214,7 +214,7 @@ Typical install time on a "normal" desktop computer is about 30 minutes.
 
 # Dataset:
 
-Example data are given in `./sampledata`. The full data including the obtained structures and training/validation/test splits are given on Zenodo at: https://zenodo.org/record/7758478.
+Example data are given in `./sampledata`. The full data including the obtained structures and training/validation/test splits are given on Google Drive at: https://drive.google.com/drive/folders/16i8mR56aL_hX5H-D8gY45Iyk6K_tuVkc.
 
 # Disclaimer
 This tool is for research purpose and not approved for clinical use.
