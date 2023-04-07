@@ -131,7 +131,7 @@ def main():
                         default='../DeepAIR/sampledata/structure_feature/BAP',
                         help='AF2 feature file name'
                     )
-    parser.add_argument('--transformer_model_folder', 
+    parser.add_argument('--transformer_model_folder',   
                         type=str, 
                         default='../DeepAIR/ProtTrans/prot_bert_bfd', 
                         help='Root of the transformer model'
